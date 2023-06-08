@@ -15,9 +15,9 @@ return new class extends Migration
             $table->string('title');
             $table->id();
             $table->string('text');
-            $table->int('time');
+            $table->integer('time');
             $table->string('character');
-            $table->id('variant_id');
+            $table->string('variant_id');
         });
     }
 

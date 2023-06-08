@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('text');
             $table->string('audio');
-            $table->id('level_id');
+            $table->string('level_id');
         });
     }
 

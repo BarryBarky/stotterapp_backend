@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('levels', function (Blueprint $table) {
-            $table->string('title');
             $table->id();
+            $table->string('title');
             $table->string('text');
             $table->integer('time');
             $table->string('character');
-            $table->string('variant_id');
+            $table->foreignId('variant_id')->constrained()->restrictOnDelete();
+            $table->timestamps();
         });
     }
 

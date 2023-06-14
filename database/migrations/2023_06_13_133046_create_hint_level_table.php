@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hints', function (Blueprint $table) {
+        Schema::create('hint_level', function (Blueprint $table) {
             $table->id();
-            $table->string('text');
-            $table->string('audio');
+            $table->foreignId('hint_id')->constrained()->onDelete('cascade');
+            $table->foreignId('level_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hints');
+        Schema::dropIfExists('hint_level');
     }
 };

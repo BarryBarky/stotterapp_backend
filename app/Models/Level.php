@@ -12,7 +12,7 @@ class Level extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["title", "text", "time", "character", "variant_id"];
+    protected $fillable = ["title", "text", "time", "variant_id"];
 
     const EXCERPT_LENGTH = 100;
 

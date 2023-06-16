@@ -41,16 +41,13 @@ class LevelController extends Controller
 
         $formFields["variant_id"] = $request->variant_id;
 
-        if ($request->hasFile('character')) {
-            $formFields['character'] = $request->file('character')->store('levels', 'public');
-        }
-
         $level = Level::create($formFields);
 
-        //        connect the pets to the advertisement
         if (count($request->hints) >= 1) {
-            foreach ($request->hints as $hint_id) {
-                $level->hints()->attach($hint_id);
+            foreach ($request->hints as $hint) {
+                if ($hint["checked"]) {
+                    $level->hints()->attach($hint["value"]);
+                }
             }
         }
 
@@ -80,16 +77,15 @@ class LevelController extends Controller
 
         $formFields["variant_id"] = $request->variant_id;
 
-        if ($request->hasFile('character')) {
-            $formFields['character'] = $request->file('character')->store('levels', 'public');
-        }
-
         $level->update($formFields);
 
-        //        connect the pets to the advertisement
+        $level->hints()->detach();
+
         if (count($request->hints) >= 1) {
-            foreach ($request->hints as $hint_id) {
-                $level->hints()->attach($hint_id);
+            foreach ($request->hints as $hint) {
+                if ($hint["checked"]) {
+                    $level->hints()->attach($hint["value"]);
+                }
             }
         }
 

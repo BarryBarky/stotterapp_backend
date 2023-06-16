@@ -1,14 +1,20 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link, useForm} from '@inertiajs/react';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 export default function AddLevel({auth, variants, hints}) {
-    console.log(variants)
-    const { data, setData, progress, post, errors} = useForm({
+    const [checkboxes, setCheckboxes] = useState([]);
+    useEffect(()=> {
+        if (hints) {
+            for (let i = 0; i<hints.length; i++) {
+                setCheckboxes(checkboxes => [...checkboxes, {checked: false, value: hints[i].id}])
+            }
+        }
+    }, [hints])
+    const { data, setData, post, errors} = useForm({
         title: "",
         text: "",
-        character: null,
         time: 5,
         variant_id: null,
         hints: []
@@ -22,10 +28,15 @@ export default function AddLevel({auth, variants, hints}) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        // console.log(data)
         if (data.variant_id) {
             post('/dashboard/levels', data)
         }
+    }
+
+    function handleCheckboxChange(index) {
+        checkboxes[index]['checked'] = !checkboxes[index]['checked'];
+        setCheckboxes(checkboxes);
+        setData("hints", checkboxes)
     }
 
     return (
@@ -47,20 +58,9 @@ export default function AddLevel({auth, variants, hints}) {
                                         {errors.title && <div className={"text-red-500"}>{errors.title}</div>}
                                     </section>
                                     <section className={"flex flex-col gap-2"}>
-                                        <label htmlFor="text">Gesproken tekst</label>
-                                        <textarea id={"text"} cols={50} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
+                                        <label htmlFor="text">Gesproken tekstsdsds</label>
+                                        <textarea id={"text"} rows={20} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
                                         {errors.text && <div className={"text-red-500"}>{errors.text}</div>}
-                                    </section>
-                                    <section className={"flex flex-col gap-2"}>
-                                        <label htmlFor="character">Karakter</label>
-                                        <input id={"character"} accept="image/*" type="file"
-                                               onChange={e => setData('character', e.target.files[0])}/>
-                                        {progress && (
-                                            <progress value={progress.percentage} max="100">
-                                                {progress.percentage}%
-                                            </progress>
-                                        )}
-                                        {errors.character && <div>{errors.character}</div>}
                                     </section>
                                 </section>
                                 <section className="flex flex-col gap-10 w-full">
@@ -89,6 +89,9 @@ export default function AddLevel({auth, variants, hints}) {
                                             <th scope="col" className="px-6 py-3">
                                                 Gesproken tekst
                                             </th>
+                                            <th scope="col" className="px-6 py-3">
+                                                Zit het in de loop?
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -97,10 +100,13 @@ export default function AddLevel({auth, variants, hints}) {
                                                 hints.map((hint, index) =>
                                                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                         <td>
-                                                            <input type="checkbox" id="hints" value={hint.id} onChange={e => setData('hints', [...data.hints, parseInt(e.target.value)])}/>
+                                                            <input type="checkbox" id="hints" value={hint.id} onChange={() => handleCheckboxChange(index)}/>
                                                         </td>
                                                         <td className="px-6 py-4">
                                                             {hint.text}
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            {hint.is_loop ? 'ja' : 'nee'}
                                                         </td>
                                                     </tr>
                                                 )

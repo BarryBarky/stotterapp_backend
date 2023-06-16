@@ -44,7 +44,6 @@ export default function Variants({auth, variants}) {
                                             <Link href={`/dashboard/varianten/${variant.id}/bewerken`}>
                                                 <a className={"underline"}>Bewerken</a>
                                             </Link>
-                                                <a className={"hover underline"} onClick={() => onDelete(variant.id)}>Verwijderen</a>
                                         </td>
                                     </tr>
                                     )

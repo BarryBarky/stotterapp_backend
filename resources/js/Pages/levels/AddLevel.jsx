@@ -58,8 +58,8 @@ export default function AddLevel({auth, variants, hints}) {
                                         {errors.title && <div className={"text-red-500"}>{errors.title}</div>}
                                     </section>
                                     <section className={"flex flex-col gap-2"}>
-                                        <label htmlFor="text">Gesproken tekstsdsds</label>
-                                        <textarea id={"text"} rows={20} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
+                                        <label htmlFor="text">Gesproken tekst</label>
+                                        <textarea id={"text"} rows={8} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
                                         {errors.text && <div className={"text-red-500"}>{errors.text}</div>}
                                     </section>
                                 </section>

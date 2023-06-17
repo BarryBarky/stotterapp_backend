@@ -4,12 +4,19 @@ import {Head, useForm} from '@inertiajs/react';
 export default function AddHint({auth}) {
     const { data, setData, post, progress, errors} = useForm({
         text: "",
-        audio: null
+        audio: null,
+        is_loop: false
     })
 
     function handleChange(e) {
         const key = e.target.id;
         const value = e.target.value
+        setData(key, value)
+    }
+
+    function handleCheckbox(e) {
+        const key = e.target.id;
+        const value = e.target.checked
         setData(key, value)
     }
 
@@ -45,6 +52,11 @@ export default function AddHint({auth}) {
                                         </progress>
                                     )}
                                     {errors.audio && <div>{errors.audio}</div>}
+                                </section>
+                                <section className={"flex flex-col gap-2"}>
+                                    <label htmlFor="is_loop">Zit het in de loop?</label>
+                                    <input type="checkbox" id="is_loop" onChange={handleCheckbox}/>
+                                    {errors.is_loop && <div className={"text-red-500"}>{errors.is_loop}</div>}
                                 </section>
                                 <button className={"w-fit bg-black text-white px-5 py-2 rounded"} type="submit">Toevoegen</button>
                             </section>

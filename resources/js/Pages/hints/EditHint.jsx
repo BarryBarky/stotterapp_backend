@@ -4,6 +4,7 @@ import {Head, useForm} from '@inertiajs/react';
 export default function EditHint({auth, hint}) {
     const { data, setData, put, progress, errors} = useForm({
         text: hint.text,
+        is_loop: hint.is_loop,
     })
 
     function handleChange(e) {
@@ -15,6 +16,12 @@ export default function EditHint({auth, hint}) {
     function handleSubmit(e) {
         e.preventDefault()
         put(`/dashboard/hints/${hint.id}`, data)
+    }
+
+    function handleCheckbox(e) {
+        const key = e.target.id;
+        const value = e.target.checked
+        setData(key, value)
     }
 
     return (
@@ -44,6 +51,16 @@ export default function EditHint({auth, hint}) {
                                         </progress>
                                     )}
                                     {errors.audio && <div>{errors.audio}</div>}
+                                </section>
+                                <section className={"flex flex-col gap-2"}>
+                                    <label htmlFor="is_loop">Zit het in de loop?</label>
+                                    {data.is_loop ?
+                                        <input type="checkbox" id="is_loop" checked={true} onChange={handleCheckbox}/>
+                                        :
+                                        <input type="checkbox" id="is_loop" checked={false} onChange={handleCheckbox}/>
+                                    }
+
+                                    {errors.is_loop && <div className={"text-red-500"}>{errors.is_loop}</div>}
                                 </section>
                                 <button className={"w-fit bg-black text-white px-5 py-2 rounded"} type="submit">Opslaan</button>
                             </section>

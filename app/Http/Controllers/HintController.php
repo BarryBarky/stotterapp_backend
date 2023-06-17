@@ -27,6 +27,7 @@ class HintController extends Controller
     {
         $formFields = $request->validate([
             'text' => ['required'],
+            'is_loop' => ['required']
         ]);
 
         if ($request->hasFile('audio')) {
@@ -48,6 +49,7 @@ class HintController extends Controller
     {
         $formFields = $request->validate([
             'text' => ['required'],
+            'is_loop' => ['required']
         ]);
 
         if ($request->hasFile('audio')) {

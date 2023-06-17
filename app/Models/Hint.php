@@ -9,5 +9,5 @@ class Hint extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["text", "audio"];
+    protected $fillable = ["text", "audio", "is_loop"];
 }

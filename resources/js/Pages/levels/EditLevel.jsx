@@ -1,22 +1,38 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link, useForm} from '@inertiajs/react';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 export default function EditLevel({auth, level, variants, hints}) {
-    const { data, setData, progress, put, errors} = useForm({
+    const [checkboxes, setCheckboxes] = useState([]);
+
+    useEffect(()=> {
+        if (hints) {
+            for (let i = 0; i<hints.length; i++) {
+                setCheckboxes(checkboxes => [...checkboxes, {checked: false, value: hints[i].id}])
+            }
+        }
+    }, [hints])
+
+    const { data, setData, put, errors} = useForm({
         title: level.title,
         text: level.text,
         character: level.character,
         time: level.time,
         variant_id: level.variant.id,
-        hints: level.hints
+        hints: []
     })
 
     function handleChange(e) {
         const key = e.target.id;
         const value = e.target.value
         setData(key, value)
+    }
+
+    function handleCheckboxChange(index) {
+        checkboxes[index]['checked'] = !checkboxes[index]['checked'];
+        setCheckboxes(checkboxes);
+        setData("hints", checkboxes)
     }
 
     function handleSubmit(e) {
@@ -31,9 +47,9 @@ export default function EditLevel({auth, level, variants, hints}) {
         <AuthenticatedLayout
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Alle Levels |
-                Level toevoegen</h2>}
+                Level Bewerken</h2>}
         >
-            <Head title="Level Toevoegen"/>
+            <Head title="Level Bewerken"/>
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -49,17 +65,6 @@ export default function EditLevel({auth, level, variants, hints}) {
                                         <label htmlFor="text">Gesproken tekst</label>
                                         <textarea id={"text"} cols={50} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
                                         {errors.text && <div className={"text-red-500"}>{errors.text}</div>}
-                                    </section>
-                                    <section className={"flex flex-col gap-2"}>
-                                        <label htmlFor="character">Karakter</label>
-                                        <input id={"character"} accept="image/*" type="file"
-                                               onChange={e => setData('character', e.target.files[0])}/>
-                                        {progress && (
-                                            <progress value={progress.percentage} max="100">
-                                                {progress.percentage}%
-                                            </progress>
-                                        )}
-                                        {errors.character && <div>{errors.character}</div>}
                                     </section>
                                 </section>
                                 <section className="flex flex-col gap-10 w-full">
@@ -96,7 +101,7 @@ export default function EditLevel({auth, level, variants, hints}) {
                                                 hints.map((hint, index) =>
                                                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                         <td>
-                                                            <input type="checkbox" id="hints" value={hint.id} onChange={e => setData('hints', [...data.hints, parseInt(e.target.value)])}/>
+                                                            <input type="checkbox" id="hints" value={hint.id} onChange={() => handleCheckboxChange(index)}/>
                                                         </td>
                                                         <td className="px-6 py-4">
                                                             {hint.text}

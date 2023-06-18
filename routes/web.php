@@ -19,7 +19,6 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -53,7 +52,7 @@ Route::delete('/dashboard/hints/{hint}', [\App\Http\Controllers\HintController::
 Route::get('/dashboard/users', [\App\Http\Controllers\UserController::class, 'index'])->middleware(['auth', 'verified'])->name('users');
 Route::get('/dashboard/users/toevoegen', [\App\Http\Controllers\UserController::class, 'create'])->middleware(['auth', 'verified'])->name('addUser');
 Route::post('/dashboard/users', [\App\Http\Controllers\UserController::class, 'store'])->middleware(['auth', 'verified'])->name('storeUser');
-Route::get('/dashboard/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->middleware(['auth', 'verified'])->name('deleteUser');
+Route::delete('/dashboard/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->middleware(['auth', 'verified'])->name('deleteUser');
 
 
 Route::middleware('auth')->group(function () {

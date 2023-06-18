@@ -2,7 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, useForm} from '@inertiajs/react';
 
 export default function AddUser({auth}) {
-    const { data, setData, post, progress, errors} = useForm({
+    const { data, setData, post, errors} = useForm({
         name: "",
         email: "",
         password: ""
@@ -14,11 +14,7 @@ export default function AddUser({auth}) {
         setData(key, value)
     }
 
-    function handleCheckbox(e) {
-        const key = e.target.id;
-        const value = e.target.checked
-        setData(key, value)
-    }
+
 
     function handleSubmit(e) {
         e.preventDefault()

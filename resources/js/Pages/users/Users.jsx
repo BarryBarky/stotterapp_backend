@@ -8,7 +8,7 @@ export default function Users({ auth, users }) {
     const { delete: destroy } = useForm()
 
     const onDelete = (id) => {
-        destroy(`/dashboard/users/${name}`)
+        destroy(`/dashboard/users/${id}`)
     }
 
     return (
@@ -48,7 +48,7 @@ export default function Users({ auth, users }) {
                                                 </td>
                                                 <td className={"flex gap-5 justify-end px-6 py-4"}>
                                                     
-                                                    <a className={"hover underline"} onClick={() => onDelete(user.name)}>Verwijderen</a>
+                                                    <a className={"hover underline"} style={{cursor: 'pointer'}} onClick={() => onDelete(user.id)}>Verwijderen</a>
                                                 </td>
                                             </tr>
                                         )

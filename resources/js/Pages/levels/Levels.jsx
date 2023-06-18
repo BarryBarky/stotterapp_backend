@@ -62,7 +62,7 @@ export default function Levels({ auth, levels }) {
                                                     <Link href={`/dashboard/levels/${level.id}/bewerken`}>
                                                         <a className={"underline"}>Bewerken</a>
                                                     </Link>
-                                                    <a className={"hover underline"} onClick={() => onDelete(level.id)}>Verwijderen</a>
+                                                    <a className={"hover underline"} style={{cursor: 'pointer'}} onClick={() => onDelete(level.id)}>Verwijderen</a>
                                                 </td>
                                             </tr>
                                         )

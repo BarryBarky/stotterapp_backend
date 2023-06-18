@@ -44,7 +44,7 @@ export default function Hints({auth, hints}) {
                                                     <Link href={`/dashboard/hints/${hint.id}/bewerken`}>
                                                         <a className={"underline"}>Bewerken</a>
                                                     </Link>
-                                                    <a className={"hover underline"} onClick={() => onDelete(hint.id)}>Verwijderen</a>
+                                                    <a className={"hover underline"} style={{cursor: 'pointer'}} onClick={() => onDelete(hint.id)}>Verwijderen</a>
                                                 </td>
                                             </tr>
                                         )

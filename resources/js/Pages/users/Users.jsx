@@ -2,21 +2,21 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link, useForm} from '@inertiajs/react';
 import NavLink from "@/Components/NavLink.jsx";
 
-export default function Levels({ auth, levels }) {
-    console.log(levels[0])
+export default function Users({ auth, users }) {
+    console.log(users[0])
 
     const { delete: destroy } = useForm()
 
     const onDelete = (id) => {
-        destroy(`/dashboard/levels/${id}`)
+        destroy(`/dashboard/users/${id}`)
     }
 
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Alle levels</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Alle Users</h2>}
         >
-            <Head title="Alle levels" />
+            <Head title="Alle users" />
 
             <div className="py-12 px-10">
                 <div className="flex flex-col gap-10 max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -28,53 +28,39 @@ export default function Levels({ auth, levels }) {
                                     className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" className="px-6 py-3">
-                                        Titel
+                                        Naam 
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Gesproken tekst
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Tijd
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Variant
+                                        Email
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {
-                                    levels.length > 0 ?
-                                        levels.map((level, index) =>
+                                    users.length > 0 ?
+                                        users.map((user, index) =>
                                             <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                 <td className="px-6 py-4">
-                                                    {level.title}
+                                                    {user.name}
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    {level.text}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {level.time}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {level.variant.name}
+                                                    {user.email}
                                                 </td>
                                                 <td className={"flex gap-5 justify-end px-6 py-4"}>
-                                                    <Link href={`/dashboard/levels/${level.id}/bewerken`}>
-                                                        <a className={"underline"}>Bewerken</a>
-                                                    </Link>
-                                                    <a className={"hover underline"} style={{cursor: 'pointer'}} onClick={() => onDelete(level.id)}>Verwijderen</a>
+                                                    
+                                                    <a className={"hover underline"} style={{cursor: 'pointer'}} onClick={() => onDelete(user.id)}>Verwijderen</a>
                                                 </td>
                                             </tr>
                                         )
                                         :
-                                        <tr><td className={"text-red-500 px-6 py-4"}>Geen levels gevonden</td></tr>
+                                        <tr><td className={"text-red-500 px-6 py-4"}>Geen users gevonden</td></tr>
 
                                 }
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <Link href={route('addLevel')}>
+                    <Link href={route('addUser')}>
                         <button className={"py-2 px-5 bg-black rounded text-white"}>
                             Toevoegen
                         </button>

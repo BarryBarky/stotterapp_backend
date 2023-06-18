@@ -38,7 +38,7 @@ export default function EditHint({auth, hint}) {
                             <section className="flex flex-col gap-10">
                                 <section className={"flex flex-col gap-2"}>
                                     <label htmlFor="text">Gesproken Tekst</label>
-                                    <textarea id={"text"} cols={50} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
+                                    <textarea id={"text"} rows={8} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
                                     {errors.text && <div className={"text-red-500"}>{errors.text}</div>}
                                 </section>
                                 <section className={"flex flex-col gap-2"}>

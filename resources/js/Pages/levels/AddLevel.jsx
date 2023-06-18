@@ -35,12 +35,22 @@ export default function AddHint({auth}) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <form onSubmit={handleSubmit} className="p-6 flex flex-col md:flex-row justify-between gap-10">
-                            <section className="flex flex-col gap-10">
-                                <section className={"flex flex-col gap-2"}>
-                                    <label htmlFor="text">Gesproken Tekst</label>
-                                    <textarea id={"text"} cols={50} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
-                                    {errors.text && <div className={"text-red-500"}>{errors.text}</div>}
+
+
+                        <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-10">
+                            <section className={"flex flex-col md:flex-row justify-between gap-20"}>
+                                <section className="flex flex-col gap-10 w-full">
+                                    <section className={"flex flex-col gap-2"}>
+                                        <label htmlFor="title">Titel</label>
+                                        <input id={"title"} type="text" value={data.title} onChange={handleChange}/>
+                                        {errors.title && <div className={"text-red-500"}>{errors.title}</div>}
+                                    </section>
+                                    <section className={"flex flex-col gap-2"}>
+                                        <label htmlFor="text">Gesproken tekst</label>
+                                        <textarea id={"text"} rows={8} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
+                                        {errors.text && <div className={"text-red-500"}>{errors.text}</div>}
+                                    </section>
+
                                 </section>
                                 <section className={"flex flex-col gap-2"}>
                                     <label htmlFor="audio">Audio bestand</label>

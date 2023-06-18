@@ -19,7 +19,6 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -49,6 +48,12 @@ Route::post('/dashboard/hints', [\App\Http\Controllers\HintController::class, 's
 Route::get('/dashboard/hints/{hint}/bewerken', [\App\Http\Controllers\HintController::class, 'edit'])->middleware(['auth', 'verified'])->name('editHint');
 Route::put('/dashboard/hints/{hint}', [\App\Http\Controllers\HintController::class, 'save'])->middleware(['auth', 'verified'])->name('saveHint');
 Route::delete('/dashboard/hints/{hint}', [\App\Http\Controllers\HintController::class, 'destroy'])->middleware(['auth', 'verified'])->name('deleteHint');
+
+Route::get('/dashboard/users', [\App\Http\Controllers\UserController::class, 'index'])->middleware(['auth', 'verified'])->name('users');
+Route::get('/dashboard/users/toevoegen', [\App\Http\Controllers\UserController::class, 'create'])->middleware(['auth', 'verified'])->name('addUser');
+Route::post('/dashboard/users', [\App\Http\Controllers\UserController::class, 'store'])->middleware(['auth', 'verified'])->name('storeUser');
+Route::delete('/dashboard/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->middleware(['auth', 'verified'])->name('deleteUser');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

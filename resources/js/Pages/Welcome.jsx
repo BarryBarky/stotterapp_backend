@@ -30,7 +30,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                 <div className="max-w-7xl mx-auto p-6 flex flex-col items-center gap-10 lg:p-8 md:text-xl bg-white rounded">
                     <ApplicationLogo className={"w-[40%]"}/>
-                    Welkom bij het dashboard van de stotterapp!
+                    Welkom bij het dashboard van de Stotter App!
                 </div>
             </div>
 

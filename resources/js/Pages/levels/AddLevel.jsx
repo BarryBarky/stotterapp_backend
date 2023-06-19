@@ -15,7 +15,8 @@ export default function AddLevel({auth, variants, hints}) {
     const { data, setData, post, errors} = useForm({
         title: "",
         text: "",
-        time: 5,
+        attempts: 2,
+        time: 30,
         variant_id: null,
         hints: []
     })
@@ -61,6 +62,11 @@ export default function AddLevel({auth, variants, hints}) {
                                         <label htmlFor="text">Gesproken tekst</label>
                                         <textarea id={"text"} rows={8} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
                                         {errors.text && <div className={"text-red-500"}>{errors.text}</div>}
+                                    </section>
+                                    <section className={"flex flex-col gap-2"}>
+                                        <label htmlFor="attempts">Aantal pogingen</label>
+                                        <input id={"attempts"} type="number" value={data.attempts} onChange={handleChange}/>
+                                        {errors.attempts && <div className={"text-red-500"}>{errors.attempts}</div>}
                                     </section>
                                 </section>
                                 <section className="flex flex-col gap-10 w-full">

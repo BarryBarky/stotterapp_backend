@@ -37,6 +37,7 @@ class LevelController extends Controller
             'title' => ['required'],
             'text' => ['required'],
             'time' => ['required'],
+            'attempts' => ['required']
         ]);
 
         $formFields["variant_id"] = $request->variant_id;
@@ -73,6 +74,7 @@ class LevelController extends Controller
             'title' => ['required'],
             'text' => ['required'],
             'time' => ['required'],
+            'attempts' => ['required']
         ]);
 
         $formFields["variant_id"] = $request->variant_id;

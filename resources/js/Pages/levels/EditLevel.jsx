@@ -17,7 +17,7 @@ export default function EditLevel({auth, level, variants, hints}) {
     const { data, setData, put, errors} = useForm({
         title: level.title,
         text: level.text,
-        character: level.character,
+        attempts: level.attempts,
         time: level.time,
         variant_id: level.variant.id,
         hints: []
@@ -65,6 +65,11 @@ export default function EditLevel({auth, level, variants, hints}) {
                                         <label htmlFor="text">Gesproken tekst</label>
                                         <textarea id={"text"} rows={8} style={{resize: 'none'}} value={data.text} onChange={handleChange}></textarea>
                                         {errors.text && <div className={"text-red-500"}>{errors.text}</div>}
+                                    </section>
+                                    <section className={"flex flex-col gap-2"}>
+                                        <label htmlFor="attempts">Aantal pogingen</label>
+                                        <input id={"attempts"} type="number" value={data.attempts} onChange={handleChange}/>
+                                        {errors.attempts && <div className={"text-red-500"}>{errors.attempts}</div>}
                                     </section>
                                 </section>
                                 <section className="flex flex-col gap-10 w-full">

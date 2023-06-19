@@ -18,7 +18,7 @@ export default function Users({ auth, users }) {
         >
             <Head title="Alle users" />
 
-            <div className="py-12 px-10">
+            <div className="py-12 px-5 md:px-10">
                 <div className="flex flex-col gap-10 max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
@@ -28,7 +28,7 @@ export default function Users({ auth, users }) {
                                     className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" className="px-6 py-3">
-                                        Naam 
+                                        Naam
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Email
@@ -47,7 +47,7 @@ export default function Users({ auth, users }) {
                                                     {user.email}
                                                 </td>
                                                 <td className={"flex gap-5 justify-end px-6 py-4"}>
-                                                    
+
                                                     <a className={"hover underline"} style={{cursor: 'pointer'}} onClick={() => onDelete(user.id)}>Verwijderen</a>
                                                 </td>
                                             </tr>

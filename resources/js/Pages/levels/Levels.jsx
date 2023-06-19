@@ -18,7 +18,7 @@ export default function Levels({ auth, levels }) {
         >
             <Head title="Alle levels" />
 
-            <div className="py-12 px-10">
+            <div className="py-12 px-5 md:px-10">
                 <div className="flex flex-col gap-10 max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
@@ -30,7 +30,7 @@ export default function Levels({ auth, levels }) {
                                     <th scope="col" className="px-6 py-3">
                                         Titel
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="hidden md:flex px-6 py-3">
                                         Gesproken tekst
                                     </th>
                                     <th scope="col" className="px-6 py-3">
@@ -38,6 +38,9 @@ export default function Levels({ auth, levels }) {
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Variant
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Pogingen
                                     </th>
                                 </tr>
                                 </thead>
@@ -49,7 +52,7 @@ export default function Levels({ auth, levels }) {
                                                 <td className="px-6 py-4">
                                                     {level.title}
                                                 </td>
-                                                <td className="px-6 py-4">
+                                                <td className="px-6 py-4 hidden md:flex ">
                                                     {level.text}
                                                 </td>
                                                 <td className="px-6 py-4">
@@ -57,6 +60,9 @@ export default function Levels({ auth, levels }) {
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     {level.variant.name}
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    {level.attempts}
                                                 </td>
                                                 <td className={"flex gap-5 justify-end px-6 py-4"}>
                                                     <Link href={`/dashboard/levels/${level.id}/bewerken`}>
